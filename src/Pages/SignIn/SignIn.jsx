@@ -1,21 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const SignUp = () => {
+const SignIn = () => {
   return (
     <div className="card flex-shrink-0 w-full mx-auto mb-8 max-w-sm shadow-2xl bg-base-100">
       <form className="card-body">
-        <h2 className="text-3xl text-center font-semibold">Sign Up</h2>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Name</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter your name"
-            className="input input-bordered"
-          />
-        </div>
+        <h2 className="text-3xl text-center font-semibold">Sign In</h2>
+
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
@@ -35,20 +26,16 @@ const SignUp = () => {
             placeholder="password"
             className="input input-bordered"
           />
-          <select className="select select-bordered w-full max-w-xs my-4">
-            <option selected>Buyer</option>
-            <option>Seller</option>
-          </select>
 
-          <p className="text-sm">
-            Already have an account?{" "}
-            <Link to="/signin" className="link text-purple-700">
-              Sign In
+          <p className="text-sm pt-2">
+            Don't have an account?{" "}
+            <Link to="/signup" className="link text-purple-700">
+              Sign Up
             </Link>
           </p>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Sign Up</button>
+          <button className="btn btn-primary">Sign In</button>
         </div>
       </form>
       <div className="mx-3">
@@ -74,4 +61,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
