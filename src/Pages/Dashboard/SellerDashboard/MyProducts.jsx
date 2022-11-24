@@ -26,7 +26,7 @@ const MyProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map(product => (
+            {products?.map(product => (
               <tr key={product._id}>
                 <td>
                   <div className="flex items-center space-x-3">
