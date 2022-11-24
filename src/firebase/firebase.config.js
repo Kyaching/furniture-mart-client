@@ -11,13 +11,6 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_storageBucket,
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId: process.env.REACT_APP_appId,
-
-  //   apiKey: "AIzaSyAu_y6Fg-8DwRLgPbY_gva20qfLlA0wRnA",
-  //   authDomain: "esell-furniture.firebaseapp.com",
-  //   projectId: "esell-furniture",
-  //   storageBucket: "esell-furniture.appspot.com",
-  //   messagingSenderId: "838840973591",
-  //   appId: "1:838840973591:web:58d708ee4d90bc987d1f52",
 };
 
 // Initialize Firebase
