@@ -1,10 +1,35 @@
 import React from "react";
+import {useContext} from "react";
 import {Link} from "react-router-dom";
+import {AuthContext} from "../../contexts/AuthProvider";
+import {useForm} from "react-hook-form";
 
 const SignIn = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
+  const {userLogin} = useContext(AuthContext);
+
+  const handleLogin = data => {
+    console.log(data);
+    const {email, password} = data;
+    userLogin(email, password)
+      .then(result => {
+        const user = result.user;
+
+        //get token
+
+        if (user) {
+        }
+      })
+      .catch(err => {});
+  };
   return (
     <div className="card flex-shrink-0 w-full mx-auto mb-8 max-w-sm shadow-2xl bg-base-100">
-      <form className="card-body">
+      <form onSubmit={handleSubmit(handleLogin)} className="card-body">
         <h2 className="text-3xl text-center font-semibold">Sign In</h2>
 
         <div className="form-control">
@@ -12,6 +37,7 @@ const SignIn = () => {
             <span className="label-text">Email</span>
           </label>
           <input
+            {...register("email", {required: true})}
             type="email"
             placeholder="Enter your mail"
             className="input input-bordered"
@@ -22,7 +48,8 @@ const SignIn = () => {
             <span className="label-text">Password</span>
           </label>
           <input
-            type="text"
+            {...register("password", {required: true})}
+            type="password"
             placeholder="password"
             className="input input-bordered"
           />
@@ -35,7 +62,9 @@ const SignIn = () => {
           </p>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Sign In</button>
+          <button type="submit" className="btn btn-primary">
+            Sign In
+          </button>
         </div>
       </form>
       <div className="mx-3">

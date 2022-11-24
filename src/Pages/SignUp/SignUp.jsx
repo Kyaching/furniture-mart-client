@@ -3,6 +3,8 @@ import {useContext} from "react";
 import {Link} from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthProvider";
 import {useForm} from "react-hook-form";
+import axios from "axios";
+import {useState} from "react";
 
 const SignUp = () => {
   const {
@@ -11,15 +13,64 @@ const SignUp = () => {
     formState: {errors},
   } = useForm();
 
-  const {createUser} = useContext(AuthContext);
+  const {createUser, profileUpdate, signInWithGoogle} = useContext(AuthContext);
   const roles = [{value: "buyer"}, {value: "seller"}];
+  const [userInfo, setUserInfo] = useState({});
+
   const handleCreateUser = data => {
     createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
-        console.log(user);
+        updateProfile(data.name, data.email, data.role);
       })
       .catch(err => console.error(err));
+  };
+
+  const updateProfile = (name, email, role) => {
+    const profile = {
+      displayName: name,
+    };
+    profileUpdate(profile)
+      .then(() => {
+        if (profile) {
+          saveUser(name, email, role);
+          console.log("update success");
+        }
+      })
+      .catch(err => console.error(err.message));
+  };
+  const saveUser = async (name, email, role) => {
+    const user = {
+      name,
+      email,
+      role,
+    };
+    await axios({
+      method: "post",
+      data: user,
+      headers: {
+        "content-type": "application/json",
+      },
+      url: "http://localhost:5000/users",
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
+
+  // google login
+  const googleSignIn = () => {
+    const userRole = {role: "buyer"};
+    signInWithGoogle()
+      .then(result => {
+        const user = result.user;
+
+        if (user) {
+          saveUser(user.displayName, user.email, userRole.role);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   return (
@@ -59,7 +110,7 @@ const SignUp = () => {
             className="input input-bordered"
           />
           <select
-            {...register("roles")}
+            {...register("role")}
             className="select select-bordered w-full max-w-xs my-4"
           >
             {roles.map((role, i) => (
@@ -88,7 +139,11 @@ const SignUp = () => {
         </div>
       </div>
       <div className="mx-auto p-5">
-        <button aria-label="Login with Google" className="btn btn-primary">
+        <button
+          onClick={googleSignIn}
+          aria-label="Login with Google"
+          className="btn btn-primary"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
