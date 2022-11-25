@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Product = ({product}) => {
   const handleReport = async () => {
-    const res = await axios.post("http://localhost:5000/reports", {
+    const res = await axios.post(`http://localhost:5000/reports`, {
       product,
     });
     if (res.data.status) {
