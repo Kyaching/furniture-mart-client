@@ -8,7 +8,7 @@ import Navbar from "../Pages/Shared/Navbar";
 const DashboardLayout = () => {
   const {user} = useContext(AuthContext);
   const [role] = useRole(user?.email);
-
+  console.log(role);
   return (
     <div>
       <Navbar />
@@ -30,10 +30,10 @@ const DashboardLayout = () => {
             {role === "admin" && (
               <>
                 <li>
-                  <Link to="/dashboard/allsellers">All Sellers</Link>
+                  <Link to="/dashboard/allsellers/seller">All Sellers</Link>
                 </li>
                 <li>
-                  <Link>All Buyers</Link>
+                  <Link to="/dashboard/allbuyers/buyer">All Buyers</Link>
                 </li>
                 <li>
                   <Link>Reported Items</Link>

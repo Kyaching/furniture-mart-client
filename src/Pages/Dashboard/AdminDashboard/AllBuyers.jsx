@@ -4,12 +4,12 @@ import React from "react";
 import {useParams} from "react-router-dom";
 import toast from "react-hot-toast";
 
-const AllSellers = () => {
-  const {sellers} = useParams();
+const AllBuyers = () => {
+  const {buyers} = useParams();
   const {data: users, refetch} = useQuery({
-    queryKey: ["sellers"],
+    queryKey: ["buyers"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/v2/users/${sellers}`);
+      const res = await axios.get(`http://localhost:5000/v2/users/${buyers}`);
       const data = res.data.data;
       return data;
     },
@@ -21,7 +21,6 @@ const AllSellers = () => {
     toast.success("Delete success");
     refetch();
   };
-
   return (
     <div>
       <h2 className="text-3xl text-center font-bold">All Sellers</h2>
@@ -69,4 +68,4 @@ const AllSellers = () => {
   );
 };
 
-export default AllSellers;
+export default AllBuyers;

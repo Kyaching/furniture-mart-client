@@ -1,8 +1,18 @@
+import axios from "axios";
 import React from "react";
 import {Link} from "react-router-dom";
 import Modal from "../../../components/Modal";
+import toast from "react-hot-toast";
 
 const Product = ({product}) => {
+  const handleReport = async () => {
+    const res = await axios.post("http://localhost:5000/reports", {
+      product,
+    });
+    if (res.data.status) {
+      toast.success(res.data.message);
+    }
+  };
   return (
     <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md">
       <img
@@ -48,6 +58,14 @@ const Product = ({product}) => {
         <label htmlFor="booking-modal" className="btn w-full">
           Buy Now
         </label>
+        <div
+          onClick={handleReport}
+          className="flex justify-end mt-4 hover:cursor-pointer"
+        >
+          <p className="text-red-500 text-semibold text-sm">
+            Report the Product
+          </p>
+        </div>
       </div>
       <Modal product={product} />
     </div>
