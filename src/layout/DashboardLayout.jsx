@@ -30,7 +30,7 @@ const DashboardLayout = () => {
             {role === "admin" && (
               <>
                 <li>
-                  <Link>All Sellers</Link>
+                  <Link to="/dashboard/allsellers">All Sellers</Link>
                 </li>
                 <li>
                   <Link>All Buyers</Link>

@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import Modal from "../../../components/Modal";
 
 const Product = ({product}) => {
   return (
@@ -48,6 +49,7 @@ const Product = ({product}) => {
           Buy Now
         </label>
       </div>
+      <Modal product={product} />
     </div>
   );
 };

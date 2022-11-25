@@ -23,7 +23,6 @@ const Products = () => {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      <Modal />
     </div>
   );
 };
