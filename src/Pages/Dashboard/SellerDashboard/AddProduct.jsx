@@ -40,6 +40,7 @@ const AddProduct = () => {
       .then(res => {
         if (res.data.success) {
           const time = new Date();
+
           const product = {
             productName,
             originalPrice,

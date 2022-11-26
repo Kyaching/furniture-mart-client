@@ -1,8 +1,10 @@
 import {useQuery} from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, {useState} from "react";
+import toast from "react-hot-toast";
 
 const MyProducts = () => {
+  const [ad, setAd] = useState(false);
   const {data: products} = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -12,6 +14,14 @@ const MyProducts = () => {
       return data;
     },
   });
+  const handleAdvertise = async product => {
+    const res = await axios.post(`http://localhost:5000/advertises`, product);
+    console.log(res);
+    if (res.data.status) {
+      toast.success(res.data.message);
+      setAd(true);
+    }
+  };
   return (
     <div className="m-4">
       <div className="overflow-x-auto w-full">
@@ -51,7 +61,13 @@ const MyProducts = () => {
                 <td>${product.resalePrice}</td>
                 <td>available</td>
                 <th>
-                  <button className="btn btn-primary btn-xs">advertise</button>
+                  <button
+                    onClick={() => handleAdvertise(product)}
+                    className="btn btn-primary btn-xs"
+                    disabled={ad ? "true" : "false"}
+                  >
+                    advertise
+                  </button>
                 </th>
               </tr>
             ))}
