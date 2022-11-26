@@ -4,7 +4,8 @@ import {useEffect} from "react";
 import {useState} from "react";
 
 const CheckoutForm = ({order}) => {
-  const {_id, price, buyerEmail, buyerName} = order;
+  console.log(order);
+  const {_id, price, buyerEmail, buyerName, productId} = order;
   const [clientSecret, setClientSecret] = useState("");
   const [cardError, setCardError] = useState("");
   const [success, setSuccess] = useState("");
@@ -72,6 +73,7 @@ const CheckoutForm = ({order}) => {
         transactionId: paymentIntent.id,
         buyerEmail,
         buyerId: _id,
+        productId,
       };
       fetch("http://localhost:5000/payments", {
         method: "POST",

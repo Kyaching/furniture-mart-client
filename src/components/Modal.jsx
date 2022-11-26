@@ -16,6 +16,7 @@ const Modal = ({product}) => {
 
   const handleBooking = data => {
     const buyerInfo = {
+      productId: product._id,
       buyerName: user?.displayName,
       buyerEmail: user?.email,
       productTitle: productName,

@@ -56,7 +56,7 @@ const Product = ({product}) => {
           </div>
         </div>
         <label htmlFor="booking-modal" className="btn w-full">
-          Buy Now
+          Book Now
         </label>
         <div
           onClick={handleReport}

@@ -61,13 +61,16 @@ const MyProducts = () => {
                 <td>${product.resalePrice}</td>
                 <td>available</td>
                 <th>
-                  <button
-                    onClick={() => handleAdvertise(product)}
-                    className="btn btn-primary btn-xs"
-                    disabled={ad ? "true" : "false"}
-                  >
-                    advertise
-                  </button>
+                  {ad ? (
+                    ""
+                  ) : (
+                    <button
+                      onClick={() => handleAdvertise(product)}
+                      className="btn btn-primary btn-xs"
+                    >
+                      advertise
+                    </button>
+                  )}
                 </th>
               </tr>
             ))}
