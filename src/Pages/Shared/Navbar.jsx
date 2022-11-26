@@ -9,7 +9,7 @@ const Navbar = () => {
   const menu = (
     <React.Fragment>
       <li>
-        <Link>Item 1</Link>
+        <Link to="/">Home</Link>
       </li>
       {user?.uid && (
         <li>
@@ -20,7 +20,9 @@ const Navbar = () => {
   );
   const signOut = () => {
     userSignOut()
-      .then(() => {})
+      .then(() => {
+        localStorage.removeItem("accessToken");
+      })
       .catch(err => console.log(err));
   };
   return (
@@ -51,7 +53,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          daisyUI
+          E-SELL MARKET
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

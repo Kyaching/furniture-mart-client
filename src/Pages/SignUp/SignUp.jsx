@@ -5,6 +5,7 @@ import {AuthContext} from "../../contexts/AuthProvider";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import {useState} from "react";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const {
@@ -14,9 +15,9 @@ const SignUp = () => {
   } = useForm();
 
   const {createUser, profileUpdate, signInWithGoogle} = useContext(AuthContext);
+  const [userEmail, setUserEmail] = useState("");
+  const [token] = useToken(userEmail);
   const roles = [{value: "buyer"}, {value: "seller"}];
-  const [userInfo, setUserInfo] = useState({});
-
   const handleCreateUser = data => {
     createUser(data.email, data.password)
       .then(result => {
@@ -34,6 +35,7 @@ const SignUp = () => {
       .then(() => {
         if (profile) {
           saveUser(name, email, role);
+
           console.log("update success");
         }
       })
@@ -53,7 +55,9 @@ const SignUp = () => {
       },
       url: "http://localhost:5000/users",
     })
-      .then(res => console.log(res))
+      .then(res => {
+        setUserEmail(email);
+      })
       .catch(err => console.log(err));
   };
 
@@ -63,7 +67,6 @@ const SignUp = () => {
     signInWithGoogle()
       .then(result => {
         const user = result.user;
-
         if (user) {
           saveUser(user.displayName, user.email, userRole.role);
         }

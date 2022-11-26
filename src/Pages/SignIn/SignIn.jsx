@@ -3,6 +3,8 @@ import {useContext} from "react";
 import {Link} from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthProvider";
 import {useForm} from "react-hook-form";
+import useToken from "../../hooks/useToken";
+import {useState} from "react";
 
 const SignIn = () => {
   const {
@@ -12,6 +14,8 @@ const SignIn = () => {
   } = useForm();
 
   const {userLogin} = useContext(AuthContext);
+  const [userEmail, setUserEmail] = useState("");
+  const [token] = useToken(userEmail);
 
   const handleLogin = data => {
     console.log(data);
@@ -21,8 +25,8 @@ const SignIn = () => {
         const user = result.user;
 
         //get token
-
         if (user) {
+          setUserEmail(email);
         }
       })
       .catch(err => {});

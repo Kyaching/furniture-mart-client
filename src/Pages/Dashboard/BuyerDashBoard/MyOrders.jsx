@@ -1,27 +1,32 @@
 import {useQuery} from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import {useContext} from "react";
 import toast from "react-hot-toast";
 
 import {Link} from "react-router-dom";
+import {AuthContext} from "../../../contexts/AuthProvider";
 
 const MyOrders = () => {
+  const {user} = useContext(AuthContext);
+
   const {data: orders} = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/bookings");
+      const res = await axios.get(
+        `http://localhost:5000/bookings?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = res.data.data;
 
       return data;
     },
   });
-  // const handlePay = async product => {
-  //   // const res = await axios.post(`http://localhost:5000/advertises`, product);
-  //   // console.log(res);
-  //   // if (res.data.status) {
-  //   //   toast.success(res.data.message);
-  //   // }
-  // };
+
   return (
     <div className="m-4">
       <div className="overflow-x-auto w-full">

@@ -6,11 +6,13 @@ import {AuthContext} from "../contexts/AuthProvider";
 import toast from "react-hot-toast";
 
 const Modal = ({product}) => {
+  console.log(product);
   const {user} = useContext(AuthContext);
-  const {productName, image} = product;
+  const {productName, image, resalePrice} = product;
   const {
     register,
     handleSubmit,
+    reset,
     formState: {errors},
   } = useForm();
 
@@ -32,10 +34,12 @@ const Modal = ({product}) => {
       data: buyerInfo,
     })
       .then(res => {
-        console.log(res);
-        toast.success("Booking Successful");
+        if (res) {
+          reset();
+        }
       })
       .catch(err => console.log(err));
+    toast.success("Booking Successful");
   };
   return (
     <>
@@ -49,35 +53,37 @@ const Modal = ({product}) => {
           >
             ✕
           </label>
+          <div className="flex justify-between">
+            <div>
+              <label className="label">
+                <span className="label-text">Your Name</span>
+              </label>
+              <input
+                defaultValue={user?.displayName}
+                type="text"
+                className="input input-bordered"
+                disabled
+              />
+            </div>
+            <div>
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                defaultValue={user?.email}
+                type="text"
+                className="input input-bordered"
+                disabled
+              />
+            </div>
+          </div>
 
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Your Name</span>
-            </label>
-            <input
-              defaultValue={user?.displayName}
-              type="text"
-              className="input input-bordered"
-              disabled
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              defaultValue={user?.email}
-              type="text"
-              className="input input-bordered"
-              disabled
-            />
-          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Item Name</span>
             </label>
             <input
-              defaultValue={product.productName}
+              defaultValue={productName}
               type="text"
               className="input input-bordered"
               disabled
@@ -88,7 +94,7 @@ const Modal = ({product}) => {
               <span className="label-text">Price</span>
             </label>
             <input
-              defaultValue={`$${product.resalePrice}`}
+              defaultValue={`$${resalePrice}`}
               type="text"
               className="input input-bordered"
               disabled
@@ -116,8 +122,12 @@ const Modal = ({product}) => {
               className="input input-bordered"
             />
           </div>
-          <div className="form-control mt-6">
-            <button type="submit" className="btn btn-primary">
+          <div className="modal-action form-control mt-6">
+            <button
+              htmlFor="booking-modal"
+              type="submit"
+              className="btn btn-primary"
+            >
               Submit
             </button>
           </div>
