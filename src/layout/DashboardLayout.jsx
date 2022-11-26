@@ -8,7 +8,7 @@ import Navbar from "../Pages/Shared/Navbar";
 const DashboardLayout = () => {
   const {user} = useContext(AuthContext);
   const [role] = useRole(user?.email);
-  console.log(role);
+
   return (
     <div>
       <Navbar />
@@ -44,7 +44,7 @@ const DashboardLayout = () => {
             {/* If Buyer */}
             {role === "buyer" && (
               <li>
-                <Link>My Orders</Link>
+                <Link to="/dashboard/myorders">My Orders</Link>
               </li>
             )}
             {/* If Seller */}

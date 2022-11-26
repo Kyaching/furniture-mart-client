@@ -5,7 +5,7 @@ import {AuthContext} from "../../contexts/AuthProvider";
 
 const Navbar = () => {
   const {user, userSignOut} = useContext(AuthContext);
-  console.log(user);
+
   const menu = (
     <React.Fragment>
       <li>
