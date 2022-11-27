@@ -1,8 +1,11 @@
 import axios from "axios";
 import React from "react";
+import {useContext} from "react";
 import {useForm} from "react-hook-form";
+import {AuthContext} from "../../../contexts/AuthProvider";
 
 const AddProduct = () => {
+  const {user} = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -42,6 +45,8 @@ const AddProduct = () => {
           const time = new Date();
 
           const product = {
+            userEmail: user.email,
+            sellerName: user.name,
             productName,
             originalPrice,
             resalePrice,

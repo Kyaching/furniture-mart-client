@@ -10,16 +10,15 @@ const ReportedItems = () => {
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/reports`);
       const data = res.data.data;
-      console.log(data);
       return data;
     },
   });
 
   const handleDelete = async id => {
-    console.log(id);
     const res = await axios.delete(`http://localhost:5000/reports/${id}`);
-    console.log(res.data);
-    toast.success("Delete success");
+    if (res) {
+      toast.success("Delete success");
+    }
     refetch();
   };
 

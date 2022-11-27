@@ -9,12 +9,7 @@ const Modal = ({product}) => {
   console.log(product);
   const {user} = useContext(AuthContext);
   const {productName, image, resalePrice} = product;
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: {errors},
-  } = useForm();
+  const {register, handleSubmit, reset} = useForm();
 
   const handleBooking = data => {
     const buyerInfo = {

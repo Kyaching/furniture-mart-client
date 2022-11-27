@@ -12,6 +12,8 @@ import Products from "../Pages/Home/Categories/Products";
 import Home from "../Pages/Home/Home";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +25,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/products/:name",
-        element: <Products />,
+        element: (
+          <PrivateRoute>
+            <Products />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signin",
@@ -37,7 +43,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/addproduct",
@@ -49,11 +59,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/allsellers/:sellers",
-        element: <AllSellers />,
+        element: (
+          <AdminRoute>
+            <AllSellers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allbuyers/:buyers",
-        element: <AllBuyers />,
+        element: (
+          <AdminRoute>
+            <AllBuyers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/myorders",
@@ -61,7 +79,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/reports",
-        element: <ReportedItems />,
+        element: (
+          <AdminRoute>
+            <ReportedItems />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/payment/:id",

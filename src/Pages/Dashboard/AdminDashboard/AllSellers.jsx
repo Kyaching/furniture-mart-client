@@ -14,11 +14,23 @@ const AllSellers = () => {
       return data;
     },
   });
+  const handleVerify = async (id, email) => {
+    const sellerEmail = {sellerEmail: email};
+    const res = await axios.put(
+      `http://localhost:5000/users/${id}`,
+      sellerEmail
+    );
+    if (res) {
+      toast.success("Update success");
+    }
+    refetch();
+  };
 
   const handleDelete = async id => {
     const res = await axios.delete(`http://localhost:5000/users/${id}`);
-    console.log(res);
-    toast.success("Delete success");
+    if (res) {
+      toast.success("Delete success");
+    }
     refetch();
   };
 
@@ -32,6 +44,7 @@ const AllSellers = () => {
               <th>Profile</th>
               <th>Name</th>
               <th>role</th>
+              <th>verify</th>
               <th></th>
             </tr>
           </thead>
@@ -52,6 +65,18 @@ const AllSellers = () => {
                 </td>
                 <td>{user.name}</td>
                 <td>{user.role}</td>
+                <td>
+                  {user?.verified ? (
+                    <span className="text-green-500">verified</span>
+                  ) : (
+                    <button
+                      onClick={() => handleVerify(user._id, user.email)}
+                      className="btn btn-primary btn-xs"
+                    >
+                      verify
+                    </button>
+                  )}
+                </td>
                 <th>
                   <button
                     onClick={() => handleDelete(user._id)}

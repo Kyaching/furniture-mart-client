@@ -1,6 +1,6 @@
 import React from "react";
 import {useContext} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthProvider";
 import {useForm} from "react-hook-form";
 import axios from "axios";
@@ -18,11 +18,17 @@ const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
   const [token] = useToken(userEmail);
   const roles = [{value: "buyer"}, {value: "seller"}];
+  const navigate = useNavigate();
+  if (token) {
+    navigate("/");
+  }
   const handleCreateUser = data => {
     createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
-        updateProfile(data.name, data.email, data.role);
+        if (user) {
+          updateProfile(data.name, data.email, data.role);
+        }
       })
       .catch(err => console.error(err));
   };

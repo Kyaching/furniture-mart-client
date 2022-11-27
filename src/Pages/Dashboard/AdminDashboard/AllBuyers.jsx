@@ -17,8 +17,9 @@ const AllBuyers = () => {
 
   const handleDelete = async id => {
     const res = await axios.delete(`http://localhost:5000/users/${id}`);
-    console.log(res);
-    toast.success("Delete success");
+    if (res) {
+      toast.success("Delete success");
+    }
     refetch();
   };
   return (

@@ -31,7 +31,7 @@ const AdvertisedItems = () => {
   });
   return (
     <>
-      {products.length && (
+      {products?.length && (
         <div className="my-10">
           <h2 className="text-4xl font-semibold text-center uppercase p-6">
             Advertisement Items

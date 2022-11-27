@@ -53,7 +53,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          E-SELL MARKET
+          Furniture Mart
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
