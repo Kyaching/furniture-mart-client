@@ -104,7 +104,7 @@ const SignUp = () => {
           <input
             {...register("email", {required: true})}
             type="email"
-            placeholder="Enter your mail"
+            placeholder="Enter your email"
             className="input input-bordered"
           />
         </div>
@@ -115,7 +115,7 @@ const SignUp = () => {
           <input
             {...register("password", {required: true})}
             type="password"
-            placeholder="password"
+            placeholder="Enter your password"
             className="input input-bordered"
           />
           <select

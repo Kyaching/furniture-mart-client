@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import {InfinitySpin} from "react-loader-spinner";
 import {Navigate, useLocation} from "react-router-dom";
+import Spinner from "../components/Spinner";
 import {AuthContext} from "../contexts/AuthProvider";
 import {useRole} from "../hooks/useRole";
 
@@ -10,11 +10,7 @@ const AdminRoute = ({children}) => {
   const location = useLocation();
 
   if (loading || isAdminLoading) {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <InfinitySpin width="200" color="#4fa94d" />
-      </div>
-    );
+    return <Spinner />;
   }
   if (user && role === "admin") {
     return children;

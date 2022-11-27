@@ -4,8 +4,14 @@ import {Link} from "react-router-dom";
 import Modal from "../../../components/Modal";
 import toast from "react-hot-toast";
 import {GoVerified} from "react-icons/go";
+import {useRole} from "../../../hooks/useRole";
+import {useContext} from "react";
+import {AuthContext} from "../../../contexts/AuthProvider";
+import Spinner from "../../../components/Spinner";
 
-const Product = ({product, categoryName}) => {
+const Product = ({product}) => {
+  const {user} = useContext(AuthContext);
+  const [role] = useRole(user?.email);
   const handleReport = async () => {
     const res = await axios.post(`http://localhost:5000/reports`, {
       product,
@@ -57,9 +63,15 @@ const Product = ({product, categoryName}) => {
           </div>
         </div>
 
-        <label htmlFor="booking-modal" className="btn w-full">
-          Book Now
-        </label>
+        {role === "admin" || role === "seller" ? (
+          <button htmlFor="booking-modal" className="btn w-full" disabled>
+            Book Now
+          </button>
+        ) : (
+          <label htmlFor="booking-modal" className="btn w-full">
+            Book Now
+          </label>
+        )}
         <div
           onClick={handleReport}
           className="flex justify-end mt-4 hover:cursor-pointer"

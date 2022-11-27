@@ -8,7 +8,11 @@ const ReportedItems = () => {
   const {data: products, refetch} = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/reports`);
+      const res = await axios.get(`http://localhost:5000/reports`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = res.data.data;
       return data;
     },

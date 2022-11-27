@@ -3,6 +3,7 @@ import {useContext} from "react";
 import {Link, Outlet} from "react-router-dom";
 import {AuthContext} from "../contexts/AuthProvider";
 import {useRole} from "../hooks/useRole";
+import Footer from "../Pages/Shared/Footer";
 import Navbar from "../Pages/Shared/Navbar";
 
 const DashboardLayout = () => {
@@ -61,6 +62,7 @@ const DashboardLayout = () => {
           </ul>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

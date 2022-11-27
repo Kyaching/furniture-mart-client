@@ -9,7 +9,7 @@ const AllBuyers = () => {
   const {data: users, refetch} = useQuery({
     queryKey: ["buyers"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/v2/users/${buyers}`);
+      const res = await axios.get(`http://localhost:5000/users?role=${buyers}`);
       const data = res.data.data;
       return data;
     },

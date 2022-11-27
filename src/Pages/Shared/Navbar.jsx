@@ -2,9 +2,11 @@ import React from "react";
 import {useContext} from "react";
 import {Link} from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthProvider";
+import logo from "../../assets/logo.png";
+import {ThreeDots} from "react-loader-spinner";
 
 const Navbar = () => {
-  const {user, userSignOut} = useContext(AuthContext);
+  const {user, loading, userSignOut} = useContext(AuthContext);
 
   const menu = (
     <React.Fragment>
@@ -52,24 +54,27 @@ const Navbar = () => {
             {menu}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
-          Furniture Mart
-        </Link>
+        <div className="flex items-center">
+          <img className="w-16 h-16" src={logo} alt="" />
+          <Link to="/" className="btn btn-ghost normal-case text-xl">
+            Furniture Mart
+          </Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menu}</ul>
       </div>
       <div className="navbar-end">
         {user?.uid ? (
-          <button onClick={signOut} className="btn">
+          <button onClick={signOut} className="btn btn-primary">
             Sign Out
           </button>
         ) : (
           <>
-            <Link to="/signin" className="btn mr-4">
+            <Link to="/signin" className="btn btn-primary mr-4">
               Sign In
             </Link>
-            <Link to="/signup" className="btn">
+            <Link to="/signup" className="btn btn-primary">
               Sign Up
             </Link>
           </>

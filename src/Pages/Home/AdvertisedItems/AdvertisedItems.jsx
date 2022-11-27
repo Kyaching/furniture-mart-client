@@ -25,7 +25,6 @@ const AdvertisedItems = () => {
         }
       );
       const data = res?.data?.data;
-      console.log(data);
       return data;
     },
   });
@@ -40,7 +39,7 @@ const AdvertisedItems = () => {
             <Swiper
               pagination={true}
               navigation={true}
-              slidesPerView={2}
+              slidesPerView={1}
               modules={[Pagination, Autoplay, Navigation]}
               autoplay={{
                 delay: 2500,

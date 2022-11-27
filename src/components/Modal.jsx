@@ -62,17 +62,27 @@ const Modal = ({product}) => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">Price</span>
               </label>
               <input
-                defaultValue={user?.email}
+                defaultValue={`$${resalePrice}`}
                 type="text"
                 className="input input-bordered"
                 disabled
               />
             </div>
           </div>
-
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              defaultValue={user?.email}
+              type="text"
+              className="input input-bordered"
+              disabled
+            />
+          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Item Name</span>
@@ -84,24 +94,16 @@ const Modal = ({product}) => {
               disabled
             />
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Price</span>
-            </label>
-            <input
-              defaultValue={`$${resalePrice}`}
-              type="text"
-              className="input input-bordered"
-              disabled
-            />
-          </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Phone Number</span>
             </label>
             <input
-              {...register("number", {required: true})}
-              type="text"
+              {...register("number", {
+                required: true,
+              })}
+              type="tel"
               placeholder="Enter your number"
               className="input input-bordered"
             />

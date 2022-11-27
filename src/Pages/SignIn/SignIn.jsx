@@ -1,10 +1,12 @@
 import React from "react";
 import {useContext} from "react";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthProvider";
 import {useForm} from "react-hook-form";
 import useToken from "../../hooks/useToken";
 import {useState} from "react";
+import toast from "react-hot-toast";
+import {ColorRing} from "react-loader-spinner";
 
 const SignIn = () => {
   const {
@@ -13,24 +15,55 @@ const SignIn = () => {
     formState: {errors},
   } = useForm();
 
-  const {userLogin} = useContext(AuthContext);
+  const {userLogin, signInWithGoogle} = useContext(AuthContext);
   const [userEmail, setUserEmail] = useState("");
+  const [signInError, setSignInError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [token] = useToken(userEmail);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, {replace: true});
+  }
+
   const handleLogin = data => {
+    setSignInError("");
+    setLoading(true);
     console.log(data);
     const {email, password} = data;
     userLogin(email, password)
       .then(result => {
         const user = result.user;
-
+        setLoading(false);
         //get token
         if (user) {
+          toast.success("Successfully Logged In");
           setUserEmail(email);
         }
       })
-      .catch(err => {});
+      .catch(err => {
+        setSignInError(err.message);
+      });
   };
+  const googleSignIn = () => {
+    setLoading(true);
+    signInWithGoogle()
+      .then(result => {
+        const user = result.user;
+        setUserEmail(user.email);
+        if (user) {
+          toast.success("Successfully Logged In");
+          setLoading(false);
+        }
+      })
+      .catch(err => {
+        toast.error(err.message);
+      });
+  };
+
   return (
     <div className="card flex-shrink-0 w-full mx-auto mb-8 max-w-sm shadow-2xl bg-base-100">
       <form onSubmit={handleSubmit(handleLogin)} className="card-body">
@@ -43,10 +76,13 @@ const SignIn = () => {
           <input
             {...register("email", {required: true})}
             type="email"
-            placeholder="Enter your mail"
+            placeholder="Enter your email"
             className="input input-bordered"
           />
         </div>
+        {errors.email && (
+          <p className="text-red-600">{errors.email?.message}</p>
+        )}
         <div className="form-control">
           <label className="label">
             <span className="label-text">Password</span>
@@ -54,10 +90,15 @@ const SignIn = () => {
           <input
             {...register("password", {required: true})}
             type="password"
-            placeholder="password"
+            placeholder="Enter your password"
             className="input input-bordered"
           />
-
+          {errors.password && (
+            <p className="text-red-600">{errors.password?.message}</p>
+          )}
+          <div>
+            {signInError && <p className="text-red-600">{signInError}</p>}
+          </div>
           <p className="text-sm pt-2">
             Don't have an account?{" "}
             <Link to="/signup" className="link text-purple-700">
@@ -67,7 +108,19 @@ const SignIn = () => {
         </div>
         <div className="form-control mt-6">
           <button type="submit" className="btn btn-primary">
-            Sign In
+            {loading ? (
+              <ColorRing
+                visible={true}
+                height="40"
+                width="40"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#e15b64"]}
+              />
+            ) : (
+              "Sign In"
+            )}
           </button>
         </div>
       </form>
@@ -79,7 +132,11 @@ const SignIn = () => {
         </div>
       </div>
       <div className="mx-auto p-5">
-        <button aria-label="Login with Google" className="btn btn-primary">
+        <button
+          onClick={googleSignIn}
+          aria-label="Login with Google"
+          className="btn btn-primary"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"

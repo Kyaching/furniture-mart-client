@@ -1,19 +1,18 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import image from "../../../assets/bedroom.png";
 
 const Category = ({category}) => {
   return (
-    <Link to={`/products/${category.categoryName}`}>
-      <div className="w-96 p-4 h-96 mx-auto shadow-xl image-full relative hover:bg-gray-300">
-        <img
-          className="h-full rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-100"
-          src="https://placeimg.com/400/225/arch"
-          alt="Shoes"
-        />
-
-        <h2 className="absolute text-2xl bottom-2 text-white p-6">
+    <Link
+      to={`/products/${category.categoryName}`}
+      className="card w-96 bg-base-100 shadow-xl bg-gradient-to-r from-cyan-500 to-blue-500"
+    >
+      <div className="flex justify-between items-center m-4 ">
+        <img className="w-24 h-24" src={image} alt="" />
+        <p className="text-xl font-semibold text-white">
           {category.categoryName}
-        </h2>
+        </p>
       </div>
     </Link>
   );
