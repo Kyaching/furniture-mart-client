@@ -4,11 +4,10 @@ import React from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import "./styles.css";
 
-import {Autoplay, Pagination, Navigation} from "swiper";
+import {Autoplay, Pagination} from "swiper";
 import {useContext} from "react";
 import {AuthContext} from "../../../contexts/AuthProvider";
 const AdvertisedItems = () => {
@@ -17,7 +16,7 @@ const AdvertisedItems = () => {
     queryKey: ["advertises"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/advertises?email=${user?.email}`,
+        `https://e-sell-server.vercel.app/advertises?email=${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -35,12 +34,11 @@ const AdvertisedItems = () => {
           <h2 className="text-4xl font-semibold text-center uppercase p-6">
             Advertisement Items
           </h2>
-          <div className="carousel w-full h-96">
+          <div className="carousel w-full h-[400px]">
             <Swiper
               pagination={true}
-              navigation={true}
               slidesPerView={1}
-              modules={[Pagination, Autoplay, Navigation]}
+              modules={[Pagination, Autoplay]}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
@@ -50,7 +48,7 @@ const AdvertisedItems = () => {
               {products?.map(product => (
                 <SwiperSlide key={product._id}>
                   <img
-                    className="w-full h-full object-contain"
+                    className="w-full h-full bg-cover"
                     src={product.image}
                     alt=""
                   />

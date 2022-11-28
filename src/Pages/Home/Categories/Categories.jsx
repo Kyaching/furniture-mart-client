@@ -7,7 +7,7 @@ const Categories = () => {
   const {data: categories} = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await axios("http://localhost:5000/categories");
+      const res = await axios("https://e-sell-server.vercel.app/categories");
       const data = res?.data?.data;
       return data;
     },

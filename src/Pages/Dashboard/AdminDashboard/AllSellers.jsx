@@ -9,7 +9,9 @@ const AllSellers = () => {
   const {data: users, refetch} = useQuery({
     queryKey: ["sellers"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/v2/users/${sellers}`);
+      const res = await axios.get(
+        `https://e-sell-server.vercel.app/v2/users/${sellers}`
+      );
       const data = res.data.data;
       return data;
     },
@@ -17,7 +19,7 @@ const AllSellers = () => {
   const handleVerify = async (id, email) => {
     const sellerEmail = {sellerEmail: email};
     const res = await axios.put(
-      `http://localhost:5000/users/${id}`,
+      `https://e-sell-server.vercel.app/users/${id}`,
       sellerEmail
     );
     if (res) {
@@ -27,7 +29,9 @@ const AllSellers = () => {
   };
 
   const handleDelete = async id => {
-    const res = await axios.delete(`http://localhost:5000/users/${id}`);
+    const res = await axios.delete(
+      `https://e-sell-server.vercel.app/users/${id}`
+    );
     if (res) {
       toast.success("Delete success");
     }

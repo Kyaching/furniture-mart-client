@@ -1,6 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
+import Blog from "../Pages/Blog/Blog";
 import AllBuyers from "../Pages/Dashboard/AdminDashboard/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AdminDashboard/AllSellers";
 import ReportedItems from "../Pages/Dashboard/AdminDashboard/ReportedItems";
@@ -8,6 +9,7 @@ import MyOrders from "../Pages/Dashboard/BuyerDashBoard/MyOrders";
 import Payment from "../Pages/Dashboard/BuyerDashBoard/Payment";
 import AddProduct from "../Pages/Dashboard/SellerDashboard/AddProduct";
 import MyProducts from "../Pages/Dashboard/SellerDashboard/MyProducts";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Products from "../Pages/Home/Categories/Products";
 import Home from "../Pages/Home/Home";
 import SignIn from "../Pages/SignIn/SignIn";
@@ -18,10 +20,15 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
       },
       {
         path: "/products/:name",
@@ -48,6 +55,7 @@ export const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/dashboard/addproduct",
@@ -89,7 +97,11 @@ export const router = createBrowserRouter([
         path: "/dashboard/payment/:id",
         element: <Payment />,
         loader: ({params}) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(`https://e-sell-server.vercel.app/bookings/${params.id}`, {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }),
       },
     ],
   },

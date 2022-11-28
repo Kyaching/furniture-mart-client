@@ -21,6 +21,13 @@ const DashboardLayout = () => {
         />
         <div className="drawer-content">
           {/* <!-- Page content here --> */}
+          {/* <div className="flex items-center justify-center">
+            <h2 className="text-5xl font-bold">Welcome!! </h2>
+            <span className="text-xl font-semibold text-green-700">
+              {" "}
+              {user?.displayName}{" "}
+            </span>
+          </div> */}
           <Outlet />
         </div>
         <div className="drawer-side">

@@ -22,36 +22,46 @@ const SignUp = () => {
   if (token) {
     navigate("/");
   }
-  const handleCreateUser = data => {
+  const handleCreateUser = async data => {
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMAGE_KEY}`;
+
+    const res = await axios.post(url, formData);
+    const imageData = res.data.data.url;
     createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
         if (user) {
-          updateProfile(data.name, data.email, data.role);
+          updateProfile(data.name, data.email, data.role, imageData);
         }
       })
       .catch(err => console.error(err));
   };
 
-  const updateProfile = (name, email, role) => {
+  const updateProfile = (name, email, role, photo) => {
     const profile = {
       displayName: name,
+      PhotoURL: photo,
     };
     profileUpdate(profile)
       .then(() => {
         if (profile) {
-          saveUser(name, email, role);
+          saveUser(name, email, role, photo);
+          setUserEmail(email);
 
           console.log("update success");
         }
       })
       .catch(err => console.error(err.message));
   };
-  const saveUser = async (name, email, role) => {
+  const saveUser = async (name, email, role, photo) => {
     const user = {
       name,
       email,
       role,
+      photo,
     };
     await axios({
       method: "post",
@@ -59,11 +69,9 @@ const SignUp = () => {
       headers: {
         "content-type": "application/json",
       },
-      url: "http://localhost:5000/users",
+      url: "https://e-sell-server.vercel.app/users",
     })
-      .then(res => {
-        setUserEmail(email);
-      })
+      .then(res => {})
       .catch(err => console.log(err));
   };
 
@@ -74,7 +82,8 @@ const SignUp = () => {
       .then(result => {
         const user = result.user;
         if (user) {
-          saveUser(user.displayName, user.email, userRole.role);
+          saveUser(user.displayName, user.email, userRole.role, user.PhotoURL);
+          setUserEmail(user.email);
         }
       })
       .catch(err => {
@@ -118,14 +127,24 @@ const SignUp = () => {
             placeholder="Enter your password"
             className="input input-bordered"
           />
-          <select
-            {...register("role")}
-            className="select select-bordered w-full max-w-xs my-4"
-          >
-            {roles.map((role, i) => (
-              <option key={i}>{role.value}</option>
-            ))}
-          </select>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Add Photo</span>
+            </label>
+            <input
+              {...register("image", {required: true})}
+              type="file"
+              className="input input-bordered"
+            />
+            <select
+              {...register("role")}
+              className="select select-bordered w-full max-w-xs my-4"
+            >
+              {roles.map((role, i) => (
+                <option key={i}>{role.value}</option>
+              ))}
+            </select>
+          </div>
 
           <p className="text-sm">
             Already have an account?{" "}
@@ -134,6 +153,7 @@ const SignUp = () => {
             </Link>
           </p>
         </div>
+
         <div className="form-control mt-6">
           <button type="submit" className="btn btn-primary">
             Sign Up

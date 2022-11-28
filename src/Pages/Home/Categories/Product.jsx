@@ -1,19 +1,17 @@
 import axios from "axios";
 import React from "react";
-import {Link} from "react-router-dom";
-import Modal from "../../../components/Modal";
 import toast from "react-hot-toast";
 import {GoVerified} from "react-icons/go";
 import {useRole} from "../../../hooks/useRole";
 import {useContext} from "react";
 import {AuthContext} from "../../../contexts/AuthProvider";
-import Spinner from "../../../components/Spinner";
+import {FaUserAlt} from "react-icons/fa";
 
-const Product = ({product}) => {
+const Product = ({product, setProductInfo}) => {
   const {user} = useContext(AuthContext);
   const [role] = useRole(user?.email);
   const handleReport = async () => {
-    const res = await axios.post(`http://localhost:5000/reports`, {
+    const res = await axios.post(`https://e-sell-server.vercel.app/reports`, {
       product,
     });
     if (res.data.status) {
@@ -27,12 +25,20 @@ const Product = ({product}) => {
         src={product.image}
         alt="Article"
       />
-
       <div className="p-6">
         <div>
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <div className="flex items-center">
+                {user.photoURL ? (
+                  <div className="avatar">
+                    <div className="w-10 rounded-full">
+                      <img src={product.sellerPhoto} alt="" />
+                    </div>
+                  </div>
+                ) : (
+                  <FaUserAlt className="border w-10 h-10 rounded-full" />
+                )}
                 <p className="mx-2 font-semibold text-gray-700" role="link">
                   {product?.sellerName}
                 </p>
@@ -68,7 +74,11 @@ const Product = ({product}) => {
             Book Now
           </button>
         ) : (
-          <label htmlFor="booking-modal" className="btn w-full">
+          <label
+            onClick={() => setProductInfo(product)}
+            htmlFor="booking-modal"
+            className="btn w-full"
+          >
             Book Now
           </label>
         )}
@@ -81,7 +91,6 @@ const Product = ({product}) => {
           </p>
         </div>
       </div>
-      <Modal product={product} />
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const useRole = email => {
   const [isAdminLoading, setIsAdminLoading] = useState(true);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/${email}`, {
+      .get(`https://e-sell-server.vercel.app/users/${email}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },

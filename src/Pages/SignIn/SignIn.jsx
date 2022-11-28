@@ -9,17 +9,16 @@ import toast from "react-hot-toast";
 import {ColorRing} from "react-loader-spinner";
 
 const SignIn = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
-
   const {userLogin, signInWithGoogle} = useContext(AuthContext);
   const [userEmail, setUserEmail] = useState("");
   const [signInError, setSignInError] = useState("");
   const [loading, setLoading] = useState(false);
   const [token] = useToken(userEmail);
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,7 +30,6 @@ const SignIn = () => {
 
   const handleLogin = data => {
     setSignInError("");
-    setLoading(true);
     console.log(data);
     const {email, password} = data;
     userLogin(email, password)
@@ -49,7 +47,6 @@ const SignIn = () => {
       });
   };
   const googleSignIn = () => {
-    setLoading(true);
     signInWithGoogle()
       .then(result => {
         const user = result.user;

@@ -9,14 +9,18 @@ const AllBuyers = () => {
   const {data: users, refetch} = useQuery({
     queryKey: ["buyers"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/users?role=${buyers}`);
+      const res = await axios.get(
+        `https://e-sell-server.vercel.app/users?role=${buyers}`
+      );
       const data = res.data.data;
       return data;
     },
   });
 
   const handleDelete = async id => {
-    const res = await axios.delete(`http://localhost:5000/users/${id}`);
+    const res = await axios.delete(
+      `https://e-sell-server.vercel.app/users/${id}`
+    );
     if (res) {
       toast.success("Delete success");
     }

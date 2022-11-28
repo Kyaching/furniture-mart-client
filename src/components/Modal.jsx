@@ -5,8 +5,7 @@ import {useForm} from "react-hook-form";
 import {AuthContext} from "../contexts/AuthProvider";
 import toast from "react-hot-toast";
 
-const Modal = ({product}) => {
-  console.log(product);
+const Modal = ({productInfo: product}) => {
   const {user} = useContext(AuthContext);
   const {productName, image, resalePrice} = product;
   const {register, handleSubmit, reset} = useForm();
@@ -22,7 +21,7 @@ const Modal = ({product}) => {
       location: data.location,
       image: image,
     };
-    const url = "http://localhost:5000/bookings";
+    const url = "https://e-sell-server.vercel.app/bookings";
     axios({
       method: "post",
       url: url,
@@ -54,7 +53,7 @@ const Modal = ({product}) => {
                 <span className="label-text">Your Name</span>
               </label>
               <input
-                defaultValue={user?.displayName}
+                value={user?.displayName}
                 type="text"
                 className="input input-bordered"
                 disabled
@@ -65,7 +64,7 @@ const Modal = ({product}) => {
                 <span className="label-text">Price</span>
               </label>
               <input
-                defaultValue={`$${resalePrice}`}
+                value={`$${resalePrice}`}
                 type="text"
                 className="input input-bordered"
                 disabled
@@ -77,7 +76,7 @@ const Modal = ({product}) => {
               <span className="label-text">Email</span>
             </label>
             <input
-              defaultValue={user?.email}
+              value={user?.email}
               type="text"
               className="input input-bordered"
               disabled
@@ -88,7 +87,7 @@ const Modal = ({product}) => {
               <span className="label-text">Item Name</span>
             </label>
             <input
-              defaultValue={productName}
+              value={productName}
               type="text"
               className="input input-bordered"
               disabled

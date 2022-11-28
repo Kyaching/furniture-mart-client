@@ -2,15 +2,14 @@ import axios from "axios";
 import React from "react";
 import {useContext} from "react";
 import {useForm} from "react-hook-form";
+import toast from "react-hot-toast";
+import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../../contexts/AuthProvider";
 
 const AddProduct = () => {
   const {user} = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
+  const {register, handleSubmit, reset} = useForm();
+  const navigation = useNavigate();
   const conditions = [{value: "Excellent"}, {value: "Good"}, {value: "Fair"}];
   const categories = [
     {value: "Living Room Furniture"},
@@ -43,10 +42,18 @@ const AddProduct = () => {
       .then(res => {
         if (res.data.success) {
           const time = new Date();
+          const format = time.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          });
 
           const product = {
             userEmail: user.email,
-            sellerName: user.name,
+            sellerName: user.displayName,
+            sellerPhoto: user.photoURL,
             productName,
             originalPrice,
             resalePrice,
@@ -57,20 +64,24 @@ const AddProduct = () => {
             description,
             location,
             image: res.data.data.url,
-            time,
+            time: format,
           };
 
           //   save data to db
           axios({
             method: "post",
-            url: "http://localhost:5000/products",
+            url: "https://e-sell-server.vercel.app/products",
             data: product,
-          })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+          }).then(res => {
+            if (res) {
+              toast.success("Added Product Successfully");
+              navigation("/dashboard/myproducts");
+            }
+          });
         }
       })
       .catch(err => console.log(err));
+    reset();
   };
 
   return (
@@ -86,7 +97,7 @@ const AddProduct = () => {
               <input
                 {...register("productName", {required: true})}
                 type="text"
-                placeholder="productName"
+                placeholder="Enter product name"
                 className="input input-bordered w-full"
               />
             </div>
@@ -97,7 +108,7 @@ const AddProduct = () => {
               <input
                 {...register("originalPrice", {required: true})}
                 type="text"
-                placeholder="password"
+                placeholder="Enter original price"
                 className="input input-bordered w-full"
               />
             </div>
@@ -108,7 +119,7 @@ const AddProduct = () => {
               <input
                 {...register("resalePrice", {required: true})}
                 type="text"
-                placeholder="productName"
+                placeholder="Enter resale price"
                 className="input input-bordered w-full"
               />
             </div>
@@ -120,7 +131,7 @@ const AddProduct = () => {
               <input
                 {...register("number", {required: true})}
                 type="text"
-                placeholder="password"
+                placeholder="Enter your number"
                 className="input input-bordered w-full"
               />
             </div>
@@ -131,18 +142,18 @@ const AddProduct = () => {
               <input
                 {...register("location", {required: true})}
                 type="text"
-                placeholder="password"
+                placeholder="Enter your location"
                 className="input input-bordered w-full"
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text">Year of purchase</span>
+                <span className="label-text">Year of Use</span>
               </label>
               <input
                 {...register("year", {required: true})}
-                type="text"
-                placeholder="password"
+                type="number"
+                placeholder="Enter Year of Use"
                 className="input input-bordered w-full"
               />
             </div>
@@ -163,7 +174,7 @@ const AddProduct = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text">Product Category?</span>
+                <span className="label-text">Choose Category</span>
               </label>
               <select
                 {...register("productCategory", {required: true})}

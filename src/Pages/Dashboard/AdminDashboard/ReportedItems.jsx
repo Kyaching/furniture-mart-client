@@ -8,7 +8,7 @@ const ReportedItems = () => {
   const {data: products, refetch} = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/reports`, {
+      const res = await axios.get(`https://e-sell-server.vercel.app/reports`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -19,7 +19,9 @@ const ReportedItems = () => {
   });
 
   const handleDelete = async id => {
-    const res = await axios.delete(`http://localhost:5000/reports/${id}`);
+    const res = await axios.delete(
+      `https://e-sell-server.vercel.app/reports/${id}`
+    );
     if (res) {
       toast.success("Delete success");
     }
