@@ -6,7 +6,7 @@ const Category = ({category}) => {
   return (
     <Link
       to={`/products/${category.categoryName}`}
-      className="card w-96 bg-base-100 shadow-xl bg-gradient-to-r from-cyan-500 to-blue-500"
+      className="card md:w-96 bg-base-100 shadow-xl bg-gradient-to-r from-cyan-500 to-blue-500"
     >
       <div className="flex justify-between items-center m-4 ">
         <img className="w-24 h-24" src={image} alt="" />

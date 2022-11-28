@@ -3,7 +3,6 @@ import {useContext} from "react";
 import {Link} from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthProvider";
 import logo from "../../assets/logo.png";
-import {ThreeDots} from "react-loader-spinner";
 
 const Navbar = () => {
   const {user, loading, userSignOut} = useContext(AuthContext);
@@ -21,6 +20,16 @@ const Navbar = () => {
           <Link to="/dashboard">Dashboard</Link>
         </li>
       )}
+      {
+        <div className=" flex lg:hidden flex-col">
+          <Link to="/signin" className="btn btn-primary my-2">
+            Sign In
+          </Link>
+          <Link to="/signup" className="btn btn-primary">
+            Sign Up
+          </Link>
+        </div>
+      }
     </React.Fragment>
   );
   const signOut = () => {
@@ -73,14 +82,14 @@ const Navbar = () => {
             Sign Out
           </button>
         ) : (
-          <>
+          <div className="hidden md:block">
             <Link to="/signin" className="btn btn-primary mr-4">
               Sign In
             </Link>
             <Link to="/signup" className="btn btn-primary">
               Sign Up
             </Link>
-          </>
+          </div>
         )}
       </div>
       <label

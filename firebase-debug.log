@@ -1,0 +1,110 @@
+[debug] [2022-11-28T16:30:58.609Z] ----------------------------------------------------------------------
+[debug] [2022-11-28T16:30:58.612Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Kyaching\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-11-28T16:30:58.613Z] CLI Version:   11.14.4
+[debug] [2022-11-28T16:30:58.613Z] Platform:      win32
+[debug] [2022-11-28T16:30:58.613Z] Node Version:  v18.5.0
+[debug] [2022-11-28T16:30:58.614Z] Time:          Mon Nov 28 2022 22:30:58 GMT+0600 (Bangladesh Standard Time)
+[debug] [2022-11-28T16:30:58.615Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-28T16:30:58.746Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-28T16:30:58.747Z] > authorizing via signed-in user (kyochingmarma@gmail.com)
+[debug] [2022-11-28T16:30:58.747Z] [iam] checking project esell-furniture for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-11-28T16:30:58.751Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/esell-furniture:testIamPermissions [none]
+[debug] [2022-11-28T16:30:58.751Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/esell-furniture:testIamPermissions x-goog-quota-user=projects/esell-furniture
+[debug] [2022-11-28T16:30:58.751Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/esell-furniture:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-28T16:31:00.725Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/esell-furniture:testIamPermissions 200
+[debug] [2022-11-28T16:31:00.725Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/esell-furniture:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-28T16:31:00.728Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/esell-furniture [none]
+[debug] [2022-11-28T16:31:01.327Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/esell-furniture 200
+[debug] [2022-11-28T16:31:01.327Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/esell-furniture {"projectId":"esell-furniture","projectNumber":"838840973591","displayName":"esell-furniture","name":"projects/esell-furniture","resources":{"hostingSite":"esell-furniture"},"state":"ACTIVE","etag":"1_57e05ba3-e17f-42ae-82e6-33b51a283c12"}
+[info] 
+[info] === Deploying to 'esell-furniture'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-11-28T16:31:01.335Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/versions [none]
+[debug] [2022-11-28T16:31:01.335Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-11-28T16:31:03.311Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/versions 200
+[debug] [2022-11-28T16:31:03.311Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/versions {"name":"projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[esell-furniture]: beginning deploy... 
+[info] i  hosting[esell-furniture]: found 18 files in build 
+[debug] [2022-11-28T16:31:03.331Z] [hosting] uploading with 200 concurrency
+[debug] [2022-11-28T16:31:04.218Z] [hosting] hash cache [YnVpbGQ] stored for 18 files
+[debug] [2022-11-28T16:31:04.219Z] [hosting][hash queue][FINAL] {"max":873,"min":7,"avg":76.05555555555556,"active":0,"complete":18,"success":18,"errored":0,"retried":0,"total":18,"elapsed":883}
+[debug] [2022-11-28T16:31:04.220Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0:populateFiles [none]
+[debug] [2022-11-28T16:31:04.220Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0:populateFiles {"files":{"/favicon.ico":"eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9","/logo.png":"951225e6501bbc2ab4c5785dd6df4cdcf7e04e066d5840350cf0b82a3d92d08a","/logo192.png":"3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b","/logo512.png":"ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331","/manifest.json":"aff3449bdc238776f5d6d967f19ec491b36aed5fb7f23ccff6500736fd58494a","/robots.txt":"bfe106a3fb878dc83461c86818bf74fc1bdc7f28538ba613cd3e775516ce8b49","/asset-manifest.json":"441d834f1c089b9f1a47387657a3c8c68049cb0f12ffcdedb81009dff578c8df","/index.html":"c9b7557c9fd9d94848dabffe4bec4aaa30e49f40ef0b3e8b74b4bee8569ac058","/static/js/787.0b7a2ed7.chunk.js":"678c82296cead95363d1fd4fd76df776815b14d17767b13a060fd6cba2bb7a66","/static/js/787.0b7a2ed7.chunk.js.map":"2a1ee4a473692ef4c8fe08a3d37ddb51f3508fe20d642f2773e4d17852fd01d8","/static/js/main.f48d1cda.js.LICENSE.txt":"bbf02ddda4b02f16f92b53119263059d1f4e01d8d1a687c8913408fb07f3f1ba","/static/media/bedroom.7536f226cfd3206c35b7.png":"84f18b08e3b0f5e3f0cd6e0bec3f5874302baa85515c78f855f51cab11d60ffc","/static/css/main.b50f3789.css.map":"31bb24afe1c3f89ac765331b8951e07afc71f92ada39410c4c5a32c545199fd2","/static/media/logo.a84370b379d9ff177617.png":"951225e6501bbc2ab4c5785dd6df4cdcf7e04e066d5840350cf0b82a3d92d08a","/static/css/main.b50f3789.css":"99882b0abc20153c9cd7cf8ec1751fd4fda73d2d826bd6dfc01402c538ad5db2","/static/media/error.742e3bdf1e75fb12d168.webp":"10b96443c15a402dec8ee8e0646610fa293475a1b2c1e458f211d5a64dc24980","/static/js/main.f48d1cda.js":"ba98a2829a5a19976a1d49da1f1ebf50eb680af258db18901df2dfdc0426c93d","/static/js/main.f48d1cda.js.map":"068a52f5f22d2b17345ba35e2e832d332708c6afeeb700053150ff54709f3f60"}}
+[debug] [2022-11-28T16:31:05.340Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0:populateFiles 200
+[debug] [2022-11-28T16:31:05.340Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0:populateFiles {"uploadRequiredHashes":["ba98a2829a5a19976a1d49da1f1ebf50eb680af258db18901df2dfdc0426c93d","99882b0abc20153c9cd7cf8ec1751fd4fda73d2d826bd6dfc01402c538ad5db2","068a52f5f22d2b17345ba35e2e832d332708c6afeeb700053150ff54709f3f60","c9b7557c9fd9d94848dabffe4bec4aaa30e49f40ef0b3e8b74b4bee8569ac058","441d834f1c089b9f1a47387657a3c8c68049cb0f12ffcdedb81009dff578c8df","31bb24afe1c3f89ac765331b8951e07afc71f92ada39410c4c5a32c545199fd2"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files"}
+[debug] [2022-11-28T16:31:05.345Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/ba98a2829a5a19976a1d49da1f1ebf50eb680af258db18901df2dfdc0426c93d [none]
+[debug] [2022-11-28T16:31:05.345Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/ba98a2829a5a19976a1d49da1f1ebf50eb680af258db18901df2dfdc0426c93d [stream]
+[debug] [2022-11-28T16:31:05.349Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/99882b0abc20153c9cd7cf8ec1751fd4fda73d2d826bd6dfc01402c538ad5db2 [none]
+[debug] [2022-11-28T16:31:05.349Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/99882b0abc20153c9cd7cf8ec1751fd4fda73d2d826bd6dfc01402c538ad5db2 [stream]
+[debug] [2022-11-28T16:31:05.352Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/068a52f5f22d2b17345ba35e2e832d332708c6afeeb700053150ff54709f3f60 [none]
+[debug] [2022-11-28T16:31:05.352Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/068a52f5f22d2b17345ba35e2e832d332708c6afeeb700053150ff54709f3f60 [stream]
+[debug] [2022-11-28T16:31:05.355Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/c9b7557c9fd9d94848dabffe4bec4aaa30e49f40ef0b3e8b74b4bee8569ac058 [none]
+[debug] [2022-11-28T16:31:05.355Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/c9b7557c9fd9d94848dabffe4bec4aaa30e49f40ef0b3e8b74b4bee8569ac058 [stream]
+[debug] [2022-11-28T16:31:05.358Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/441d834f1c089b9f1a47387657a3c8c68049cb0f12ffcdedb81009dff578c8df [none]
+[debug] [2022-11-28T16:31:05.358Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/441d834f1c089b9f1a47387657a3c8c68049cb0f12ffcdedb81009dff578c8df [stream]
+[debug] [2022-11-28T16:31:05.361Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/31bb24afe1c3f89ac765331b8951e07afc71f92ada39410c4c5a32c545199fd2 [none]
+[debug] [2022-11-28T16:31:05.361Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/31bb24afe1c3f89ac765331b8951e07afc71f92ada39410c4c5a32c545199fd2 [stream]
+[debug] [2022-11-28T16:31:05.365Z] [hosting][populate queue][FINAL] {"max":1129,"min":1129,"avg":1129,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1149}
+[debug] [2022-11-28T16:31:05.365Z] [hosting] uploads queued: 6
+[debug] [2022-11-28T16:31:07.303Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/441d834f1c089b9f1a47387657a3c8c68049cb0f12ffcdedb81009dff578c8df 200
+[debug] [2022-11-28T16:31:07.303Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/441d834f1c089b9f1a47387657a3c8c68049cb0f12ffcdedb81009dff578c8df [stream]
+[debug] [2022-11-28T16:31:07.303Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/99882b0abc20153c9cd7cf8ec1751fd4fda73d2d826bd6dfc01402c538ad5db2 200
+[debug] [2022-11-28T16:31:07.304Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/99882b0abc20153c9cd7cf8ec1751fd4fda73d2d826bd6dfc01402c538ad5db2 [stream]
+[debug] [2022-11-28T16:31:07.304Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/c9b7557c9fd9d94848dabffe4bec4aaa30e49f40ef0b3e8b74b4bee8569ac058 200
+[debug] [2022-11-28T16:31:07.304Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/c9b7557c9fd9d94848dabffe4bec4aaa30e49f40ef0b3e8b74b4bee8569ac058 [stream]
+[debug] [2022-11-28T16:31:08.007Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/31bb24afe1c3f89ac765331b8951e07afc71f92ada39410c4c5a32c545199fd2 200
+[debug] [2022-11-28T16:31:08.007Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/31bb24afe1c3f89ac765331b8951e07afc71f92ada39410c4c5a32c545199fd2 [stream]
+[debug] [2022-11-28T16:31:09.091Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/ba98a2829a5a19976a1d49da1f1ebf50eb680af258db18901df2dfdc0426c93d 200
+[debug] [2022-11-28T16:31:09.091Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/ba98a2829a5a19976a1d49da1f1ebf50eb680af258db18901df2dfdc0426c93d [stream]
+[debug] [2022-11-28T16:31:10.121Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/068a52f5f22d2b17345ba35e2e832d332708c6afeeb700053150ff54709f3f60 200
+[debug] [2022-11-28T16:31:10.122Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/esell-furniture/versions/64080bf441a6cfb0/files/068a52f5f22d2b17345ba35e2e832d332708c6afeeb700053150ff54709f3f60 [stream]
+[debug] [2022-11-28T16:31:10.122Z] [hosting][upload queue][FINAL] {"max":4780,"min":1959,"avg":2845.8333333333335,"active":0,"complete":6,"success":6,"errored":0,"retried":0,"total":6,"elapsed":4781}
+[info] +  hosting[esell-furniture]: file upload complete 
+[debug] [2022-11-28T16:31:10.123Z] [hosting] deploy completed after 6810ms
+[debug] [2022-11-28T16:31:10.130Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "esell-furniture"
+    },
+    "version": "projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0"
+  }
+]
+[info] i  hosting[esell-furniture]: finalizing version... 
+[debug] [2022-11-28T16:31:10.133Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/versions/64080bf441a6cfb0 updateMask=status%2Cconfig
+[debug] [2022-11-28T16:31:10.134Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/versions/64080bf441a6cfb0 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2022-11-28T16:31:11.258Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/versions/64080bf441a6cfb0 200
+[debug] [2022-11-28T16:31:11.258Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/versions/64080bf441a6cfb0 {"name":"projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2022-11-28T16:30:38.538028Z","createUser":{"email":"kyochingmarma@gmail.com"},"finalizeTime":"2022-11-28T16:30:47.584826Z","finalizeUser":{"email":"kyochingmarma@gmail.com"}}
+[debug] [2022-11-28T16:31:11.258Z] [hosting] finalized version for esell-furniture:[object Object]
+[info] +  hosting[esell-furniture]: version finalized 
+[info] i  hosting[esell-furniture]: releasing new version... 
+[debug] [2022-11-28T16:31:11.260Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/channels/live/releases versionName=projects%2F838840973591%2Fsites%2Fesell-furniture%2Fversions%2F64080bf441a6cfb0
+[debug] [2022-11-28T16:31:11.260Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/channels/live/releases {}
+[debug] [2022-11-28T16:31:12.321Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/channels/live/releases 200
+[debug] [2022-11-28T16:31:12.321Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/esell-furniture/channels/live/releases {"name":"projects/838840973591/sites/esell-furniture/channels/live/releases/1669653047912447","version":{"name":"projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2022-11-28T16:30:38.538028Z","createUser":{"email":"kyochingmarma@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ALm5wu1bW-kq5Xnx-w2vy2aDr8GOIFN1ERQM5Hulnzma=mo"},"finalizeTime":"2022-11-28T16:30:47.584826Z","finalizeUser":{"email":"kyochingmarma@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ALm5wu1bW-kq5Xnx-w2vy2aDr8GOIFN1ERQM5Hulnzma=mo"}},"type":"DEPLOY","releaseTime":"2022-11-28T16:30:47.912447962Z","releaseUser":{"email":"kyochingmarma@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ALm5wu1bW-kq5Xnx-w2vy2aDr8GOIFN1ERQM5Hulnzma=mo"}}
+[debug] [2022-11-28T16:31:12.321Z] [hosting] release: {"name":"projects/838840973591/sites/esell-furniture/channels/live/releases/1669653047912447","version":{"name":"projects/838840973591/sites/esell-furniture/versions/64080bf441a6cfb0","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2022-11-28T16:30:38.538028Z","createUser":{"email":"kyochingmarma@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ALm5wu1bW-kq5Xnx-w2vy2aDr8GOIFN1ERQM5Hulnzma=mo"},"finalizeTime":"2022-11-28T16:30:47.584826Z","finalizeUser":{"email":"kyochingmarma@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ALm5wu1bW-kq5Xnx-w2vy2aDr8GOIFN1ERQM5Hulnzma=mo"}},"type":"DEPLOY","releaseTime":"2022-11-28T16:30:47.912447962Z","releaseUser":{"email":"kyochingmarma@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ALm5wu1bW-kq5Xnx-w2vy2aDr8GOIFN1ERQM5Hulnzma=mo"}}
+[info] +  hosting[esell-furniture]: release complete 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/esell-furniture/overview
+[info] Hosting URL: https://esell-furniture.web.app
+[debug] [2022-11-28T16:31:17.693Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\Kyaching\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:253:49)
+    at listOnTimeout (node:internal/timers:564:17)
+    at process.processTimers (node:internal/timers:507:7)
+[error] 
+[error] Error: An unexpected error has occurred.
