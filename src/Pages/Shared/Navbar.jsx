@@ -6,6 +6,13 @@ import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const {user, loading, userSignOut} = useContext(AuthContext);
+  const signOut = () => {
+    userSignOut()
+      .then(() => {
+        localStorage.removeItem("accessToken");
+      })
+      .catch(err => console.log(err));
+  };
 
   const menu = (
     <React.Fragment>
@@ -20,25 +27,25 @@ const Navbar = () => {
           <Link to="/dashboard">Dashboard</Link>
         </li>
       )}
-      {
-        <div className=" flex lg:hidden flex-col">
-          <Link to="/signin" className="btn btn-primary my-2">
-            Sign In
-          </Link>
-          <Link to="/signup" className="btn btn-primary">
-            Sign Up
-          </Link>
-        </div>
-      }
+      <>
+        {user?.uid ? (
+          <button onClick={signOut} className="btn btn-primary block md:hidden">
+            Sign Out
+          </button>
+        ) : (
+          <div className=" flex lg:hidden flex-col">
+            <Link to="/signin" className="btn btn-primary my-2">
+              Sign In
+            </Link>
+            <Link to="/signup" className="btn btn-primary">
+              Sign Up
+            </Link>
+          </div>
+        )}
+      </>
     </React.Fragment>
   );
-  const signOut = () => {
-    userSignOut()
-      .then(() => {
-        localStorage.removeItem("accessToken");
-      })
-      .catch(err => console.log(err));
-  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -78,7 +85,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user?.uid ? (
-          <button onClick={signOut} className="btn btn-primary">
+          <button onClick={signOut} className="btn btn-primary hidden md:block">
             Sign Out
           </button>
         ) : (
