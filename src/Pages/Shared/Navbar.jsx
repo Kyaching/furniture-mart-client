@@ -27,22 +27,6 @@ const Navbar = () => {
           <Link to="/dashboard">Dashboard</Link>
         </li>
       )}
-      <>
-        {user?.uid ? (
-          <button onClick={signOut} className="btn btn-primary block md:hidden">
-            Sign Out
-          </button>
-        ) : (
-          <div className=" flex lg:hidden flex-col">
-            <Link to="/signin" className="btn btn-primary my-2">
-              Sign In
-            </Link>
-            <Link to="/signup" className="btn btn-primary">
-              Sign Up
-            </Link>
-          </div>
-        )}
-      </>
     </React.Fragment>
   );
 
@@ -75,7 +59,10 @@ const Navbar = () => {
         </div>
         <div className="flex items-center">
           <img className="w-16 h-16" src={logo} alt="" />
-          <Link to="/" className="btn btn-ghost normal-case text-xl">
+          <Link
+            to="/"
+            className="btn btn-ghost normal-case text-xl hidden md:block"
+          >
             Furniture Mart
           </Link>
         </div>
@@ -85,11 +72,11 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user?.uid ? (
-          <button onClick={signOut} className="btn btn-primary hidden md:block">
+          <button onClick={signOut} className="btn btn-primary">
             Sign Out
           </button>
         ) : (
-          <div className="hidden md:block">
+          <div className="flex">
             <Link to="/signin" className="btn btn-primary mr-4">
               Sign In
             </Link>
