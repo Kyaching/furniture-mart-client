@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import axios from "axios";
-import React, {useState} from "react";
+import React from "react";
 import {useContext} from "react";
 import toast from "react-hot-toast";
 import {AuthContext} from "../../../contexts/AuthProvider";

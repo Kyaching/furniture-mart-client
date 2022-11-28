@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import {AuthContext} from "../contexts/AuthProvider";
 import toast from "react-hot-toast";
 
-const Modal = ({productInfo: product}) => {
+const Modal = ({productInfo: product, setProductInfo}) => {
   const {user} = useContext(AuthContext);
   const {productName, image, resalePrice} = product;
   const {register, handleSubmit, reset} = useForm();
@@ -29,6 +29,7 @@ const Modal = ({productInfo: product}) => {
     })
       .then(res => {
         if (res) {
+          setProductInfo(null);
           reset();
         }
       })

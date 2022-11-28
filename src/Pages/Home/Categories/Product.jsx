@@ -30,21 +30,14 @@ const Product = ({product, setProductInfo}) => {
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <div className="flex items-center">
-                {user.photoURL ? (
-                  <div className="avatar">
-                    <div className="w-10 rounded-full">
-                      <img src={product.sellerPhoto} alt="" />
-                    </div>
-                  </div>
-                ) : (
-                  <FaUserAlt className="border w-10 h-10 rounded-full" />
-                )}
                 <p className="mx-2 font-semibold text-gray-700" role="link">
                   {product?.sellerName}
                 </p>
                 {product?.verified && <GoVerified style={{color: "green"}} />}
               </div>
-              <span className="mx-1 text-xs text-gray-600">{product.time}</span>
+              <span className="mx-1 text-xs text-gray-600">
+                Post on: {product.time}
+              </span>
             </div>
             <p>{product.location}</p>
           </div>
@@ -71,15 +64,15 @@ const Product = ({product, setProductInfo}) => {
 
         {role === "admin" || role === "seller" ? (
           <button htmlFor="booking-modal" className="btn w-full" disabled>
-            Book Now
+            Buy Now
           </button>
         ) : (
           <label
             onClick={() => setProductInfo(product)}
             htmlFor="booking-modal"
-            className="btn w-full"
+            className="btn btn-primary w-full"
           >
-            Book Now
+            Buy Now
           </label>
         )}
         <div

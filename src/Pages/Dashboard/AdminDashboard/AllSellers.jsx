@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import {useParams} from "react-router-dom";
 import toast from "react-hot-toast";
+import {FaUserAlt} from "react-icons/fa";
 
 const AllSellers = () => {
   const {sellers} = useParams();
@@ -10,7 +11,12 @@ const AllSellers = () => {
     queryKey: ["sellers"],
     queryFn: async () => {
       const res = await axios.get(
-        `https://e-sell-server.vercel.app/v2/users/${sellers}`
+        `https://e-sell-server.vercel.app/users?role=${sellers}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
       );
       const data = res.data.data;
       return data;
@@ -41,59 +47,69 @@ const AllSellers = () => {
   return (
     <div>
       <h2 className="text-3xl text-center font-bold">All Sellers</h2>
-      <div className="overflow-x-auto w-full">
-        <table className="table w-full">
-          <thead>
-            <tr>
-              <th>Profile</th>
-              <th>Name</th>
-              <th>role</th>
-              <th>verify</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {users?.map(user => (
-              <tr key={user._id}>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={user.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
+      {users?.length ? (
+        <div className="overflow-x-auto w-full">
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th>Profile</th>
+                <th>Name</th>
+                <th>role</th>
+                <th>verify</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {users?.map(user => (
+                <tr key={user._id}>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      {user.photo ? (
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={user.photo}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <FaUserAlt className="border w-10 h-10 rounded-full" />
+                      )}
                     </div>
-                  </div>
-                </td>
-                <td>{user.name}</td>
-                <td>{user.role}</td>
-                <td>
-                  {user?.verified ? (
-                    <span className="text-green-500">verified</span>
-                  ) : (
+                  </td>
+                  <td>{user.name}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    {user?.verified ? (
+                      <span className="text-green-500">verified</span>
+                    ) : (
+                      <button
+                        onClick={() => handleVerify(user._id, user.email)}
+                        className="btn btn-primary btn-xs"
+                      >
+                        verify
+                      </button>
+                    )}
+                  </td>
+                  <th>
                     <button
-                      onClick={() => handleVerify(user._id, user.email)}
+                      onClick={() => handleDelete(user._id)}
                       className="btn btn-primary btn-xs"
                     >
-                      verify
+                      delete
                     </button>
-                  )}
-                </td>
-                <th>
-                  <button
-                    onClick={() => handleDelete(user._id)}
-                    className="btn btn-primary btn-xs"
-                  >
-                    delete
-                  </button>
-                </th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="flex justify-center items-center h-96">
+          <h2 className="text-4xl font-semibold">Oops!! No User Found</h2>
+        </div>
+      )}
     </div>
   );
 };

@@ -55,7 +55,9 @@ const Products = () => {
           )}
         </>
       )}
-      {productInfo && <Modal productInfo={productInfo} />}
+      {productInfo && (
+        <Modal productInfo={productInfo} setProductInfo={setProductInfo} />
+      )}
     </div>
   );
 };

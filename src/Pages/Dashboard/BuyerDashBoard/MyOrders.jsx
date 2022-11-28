@@ -2,8 +2,6 @@ import {useQuery} from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import {useContext} from "react";
-import toast from "react-hot-toast";
-
 import {Link} from "react-router-dom";
 import Spinner from "../../../components/Spinner";
 import {AuthContext} from "../../../contexts/AuthProvider";
