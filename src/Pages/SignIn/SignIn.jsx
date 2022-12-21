@@ -76,10 +76,16 @@ const SignIn = () => {
             placeholder="Enter your email"
             className="input input-bordered"
           />
+          {errors.email && (
+            <p className="text-red-600">Please Enter your mail</p>
+          )}
+          {errors.email && (
+            <p className="text-red-500">{errors.email?.message}</p>
+          )}
         </div>
-        {errors.email && (
+        {/* {errors.email && (
           <p className="text-red-600">{errors.email?.message}</p>
-        )}
+        )} */}
         <div className="form-control">
           <label className="label">
             <span className="label-text">Password</span>
@@ -90,6 +96,9 @@ const SignIn = () => {
             placeholder="Enter your password"
             className="input input-bordered"
           />
+          {errors.password && (
+            <p className="text-red-600">Please Enter your password</p>
+          )}
           {errors.password && (
             <p className="text-red-600">{errors.password?.message}</p>
           )}

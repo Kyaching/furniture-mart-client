@@ -1,6 +1,6 @@
 import React from "react";
-import Lottie from "lottie-react";
-import marketing from "../../assets/marketing.json";
+// import Lottie from "lottie-react";
+// import marketing from "../../assets/marketing.json";
 
 const Banner = () => {
   return (
@@ -17,7 +17,11 @@ const Banner = () => {
             with furniture mart.
           </p>
         </div>
-        <Lottie className="w-full md:w-1/2" animationData={marketing} />
+        <img
+          className="w-full md:w-96"
+          src="https://img.freepik.com/free-photo/scandinavian-living-room-interior-design-zoom-background_53876-143147.jpg?w=740&t=st=1671608008~exp=1671608608~hmac=180f841eacace1a46660590ae45abac2ac3908f68069f7de6f78484bb88fdcd6"
+          alt=""
+        />
       </div>
     </div>
   );

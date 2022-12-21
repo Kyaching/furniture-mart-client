@@ -7,9 +7,9 @@ import Spinner from "../../../components/Spinner";
 import {AuthContext} from "../../../contexts/AuthProvider";
 
 const MyOrders = () => {
-  const {user, loading} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
 
-  const {data: orders} = useQuery({
+  const {data: orders, isLoading} = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await axios.get(
@@ -28,7 +28,7 @@ const MyOrders = () => {
 
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <Spinner />
       ) : (
         <div className="m-4">
